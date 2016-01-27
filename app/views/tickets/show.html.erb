@@ -1,0 +1,48 @@
+<p id="notice"><%= notice %></p>
+<div class="ui container">
+
+  
+  <h2><%= @ticket.subject %></h2>
+  
+ 
+  <p style="font-size: 1.2em;">By <%= @ticket.from %> on <%= @ticket.created_at %></p>
+  <p>Ticket number <%= @ticket.id %></p> 
+  <span>
+    Action
+   <div class="ui floating dropdown labeled search icon button">
+      <span class="text">Select action</span>
+      <div class="menu">
+        <div class="item">1</div>
+        <div class="item">2</div>
+        <div class="item">3</div>
+        <div class="item">4</div>
+      </div>
+    </div>
+  </span>
+
+
+  <p>
+    <strong>Content:</strong>
+     <%= @ticket.content.html_safe %> 
+     <!--     <%= @ticket.content %> -->
+  </p>
+
+  <% @ticket_attachments.each do |p| %>
+    <a class="fancybox" rel="gallery1" href="<%= p.image_url %>">
+      <img src="<%= p.image_url %>" style=" width: auto; height:100px; " alt="" />
+    </a>
+  <% end %><br>
+
+
+
+  <%= link_to 'Edit', edit_ticket_path(@ticket) %> |
+  <%= link_to 'Back', tickets_path %>
+
+</div>
+
+
+<script type="text/javascript">
+  $(document).ready(function() {
+    $("a.fancybox").fancybox();
+  });
+</script>

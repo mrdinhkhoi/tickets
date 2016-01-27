@@ -1,0 +1,50 @@
+<div class="ui form">
+  <%= form_for(@ticket) do |f| %>
+    <% if @ticket.errors.any? %>
+      <div id="error_explanation">
+        <h2><%= pluralize(@ticket.errors.count, "error") %> prohibited this ticket from being saved:</h2>
+
+        <ul>
+        <% @ticket.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <div class="field">
+      <%= f.label :from, "From email address" %>
+      <%= f.text_field :from %>
+    </div>
+    <div class="field">
+      <%= f.label :subject, "Subject" %>
+      <%= f.text_field :subject %>
+    </div>
+    <div class="field">
+      <%= f.label :content, "Content" %>
+        <%= f.text_area :content, :class => "tinymce" %>
+      <%= tinymce %>
+    </div>
+    <div class="field">
+      <%= f.fields_for :ticket_attachments do |p| %>
+          <label><i class="attach icon"></i>Attach file(s)</label>
+        <%= p.file_field :image, :multiple => true, name: "ticket_attachments[image][]" %>
+      <% end %>
+    <div><br>
+   
+    <div class="actions">
+      <button class="ui basic blue button" type="submit">
+        <i class="icon send outline"></i>
+        Send ticket
+      </button>
+    </div>
+  <% end %>
+
+</div>
+
+
+<script type="text/javascript">
+  tinyMCE.init({
+    selector: 'textarea.content'
+  });
+</script>

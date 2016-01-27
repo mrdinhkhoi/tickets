@@ -1,0 +1,52 @@
+<p id="notice"><%= notice %></p>
+
+<div class="ui container">
+
+  <div class="ui grid">
+    <div class="ten wide column">
+      <% if @tickets.present? %>
+        <h1>Listing Tickets (<%= @tickets.length %>)</h1>
+      <% else %>
+        <h1>0 tickets containing '<%= :search %>'  </h1>
+        <%= link_to 'Back to tickets', tickets_path %>
+      <% end%>
+    </div>
+
+    <!-- search form -->
+    <div class="six wide column">
+      <div class="ui fluid category search">
+        <%= search_form_for @q, url: search_tickets_path,
+                        html: { method: :post } do |f| %>
+          <div class="ui icon input">
+            <%= f.search_field :subject_or_from_cont, :class => "prompt", :type => "search", :placeholder => "Enter Search..." %>
+            <i class="search icon"></i>
+          </div>
+        <% end %>
+        <div class="results"></div>
+      </div>
+    </div>
+  </div>
+
+
+<!--   list_ticket -->
+  <div class="ui divided items">
+    <% @tickets.each do |ticket| %>
+      <div class="item">
+        <div class="content">
+          <div class="header"><%= link_to ticket.subject, ticket %></div>
+          <div class="description">
+            <p>#<%=ticket.id%> created by <a><%= ticket.from %></a> at <%= ticket.created_at %></p>
+          </div>
+          <%= link_to 'Show', ticket %>
+          <%= link_to 'Edit', edit_ticket_path(ticket) %>
+          <%= link_to 'Destroy', ticket, method: :delete, data: { confirm: 'Are you sure?' } %>
+        </div>
+      </div> 
+    <% end %>
+  </div>
+<%= will_paginate %>
+  <br>
+
+  <%= link_to 'New Ticket', new_ticket_path %>
+</div>
+

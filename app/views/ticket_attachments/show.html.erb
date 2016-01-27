@@ -1,0 +1,14 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Ticket:</strong>
+  <%= @ticket_attachment.ticket_id %>
+</p>
+
+<p>
+  <strong>Image:</strong>
+  <%= @ticket_attachment.image %>
+</p>
+
+<%= link_to 'Edit', edit_ticket_attachment_path(@ticket_attachment) %> |
+<%= link_to 'Back', ticket_attachments_path %>
