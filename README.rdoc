@@ -6,4 +6,4 @@
 
 
 
-rake db:seed to try search form
+6. rake db:seed to try search form
