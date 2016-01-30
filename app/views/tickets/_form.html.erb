@@ -13,26 +13,28 @@
     <% end %>
 
     <div class="field">
-      <%= f.label :from, "From email address" %>
+      <h3><%= f.label :from, "From email address" %></h3>
       <%= f.text_field :from %>
     </div>
     <div class="field">
-      <%= f.label :subject, "Subject" %>
+      <h3><%= f.label :subject, "Subject" %></h3>
       <%= f.text_field :subject %>
     </div>
     <div class="field">
-      <%= f.label :content, "Content" %>
+      <h3><%= f.label :content, "Content" %></h3>
         <%= f.text_area :content, :class => "tinymce" %>
       <%= tinymce %>
     </div>
-    <div class="field">
+    <div class="ui segment">
       <%= f.fields_for :ticket_attachments do |p| %>
-          <label><i class="attach icon"></i>Attach file(s)</label>
-        <%= p.file_field :image, :multiple => true, name: "ticket_attachments[image][]" %>
+          <h3><label><i class="attach icon"></i>Attach file(s)</label></h3>
+        <%= p.file_field :image, value: "file", class: 'ui basic blue button', :multiple => true, name: "ticket_attachments[image][]" %>
       <% end %>
-    <div><br>
-   
-    <div class="actions">
+      
+    </div>
+
+
+    <div class="ui buttons">
       <button class="ui basic blue button" type="submit">
         <i class="icon send outline"></i>
         Send ticket

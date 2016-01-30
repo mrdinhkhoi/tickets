@@ -6,7 +6,7 @@ class TicketsController < ApplicationController
   def index
     # @tickets = Ticket.all
     @q = Ticket.ransack(params[:q])
-    @tickets = @q.result(distinct: true).paginate(:page => params[:page], :per_page => 10)
+    @tickets = @q.result(distinct: true).paginate(:page => params[:page], :per_page => 10).order('created_at DESC')
   end
 
   def search

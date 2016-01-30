@@ -5,9 +5,9 @@
   <div class="ui grid">
     <div class="ten wide column">
       <% if @tickets.present? %>
-        <h1>Listing Tickets (<%= @tickets.length %>)</h1>
+        <h1>Listing Tickets (<%= @q.result(distinct: true).length %>)</h1>
       <% else %>
-        <h1>0 tickets containing '<%= :search %>'  </h1>
+        <h1>0 tickets containing '<%= params[:search] %>'  </h1>
         <%= link_to 'Back to tickets', tickets_path %>
       <% end%>
     </div>
@@ -29,7 +29,7 @@
 
 
 <!--   list_ticket -->
-  <div class="ui divided items">
+  <div class="ui divided items" id="index_ticket">
     <% @tickets.each do |ticket| %>
       <div class="item">
         <div class="content">
@@ -45,8 +45,23 @@
     <% end %>
   </div>
 <%= will_paginate %>
-  <br>
 
   <%= link_to 'New Ticket', new_ticket_path %>
 </div>
+<!-- 
+<div>
+<script>
 
+  var src_str = $("#index_ticket").html();
+  var term = "<%= @q %>";
+  term = term.replace(/(\s+)/,"(<[^>]+>)*$1(<[^>]+>)*");
+  var pattern = new RegExp("("+term+")", "gi");
+
+  src_str = src_str.replace(pattern, "<mark>$1</mark>");
+  src_str = src_str.replace(/(<mark>[^<>]*)((<[^>]+>)+)([^<>]*<\/mark>)/,"$1</mark>$2<mark>$4");
+
+  $("#index_ticket").html(src_str);
+  
+</script>
+</div>
+ -->
